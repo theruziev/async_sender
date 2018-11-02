@@ -1,0 +1,22 @@
+[[source]]
+verify_ssl = true
+url = "https://pypi.org/simple"
+name = "pypi"
+
+[dev-packages]
+"flake8" = "*"
+pytest = "*"
+pytest-asyncio = "*"
+black = "==18.9b0"
+codecov = "*"
+coverage = "*"
+aiosmtplib = "*"
+sphinx = "*"
+
+[packages]
+
+[requires]
+python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true
