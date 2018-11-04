@@ -35,7 +35,7 @@ class Mail:
         use_tls: bool = False,
         username: str = None,
         password: str = None,
-        fromaddr: str = None,
+        from_address: str = None,
         timeout: Union[int, float] = None,
         source_address: str = None,
         loop: asyncio.AbstractEventLoop = None,
@@ -54,8 +54,6 @@ class Mail:
             result of :func:`socket.getfqdn`. Note that this call blocks.
         :param timeout: Default timeout value for the connection, in seconds.
             Defaults to 60.
-        :param loop: event loop  to run on. If not set, uses
-            :func:`asyncio.get_event_loop()`.
         :param use_tls: If True, make the initial connection to the server
             over TLS/SSL. Note that if the server supports STARTTLS only, this
             should be False.
@@ -76,7 +74,7 @@ class Mail:
         self.username = username
         self.password = password
         self.use_tls = use_tls
-        self.fromaddr = fromaddr
+        self.fromaddr = from_address
         self.timeout = timeout
         self.loop = loop
         self.source_address = source_address
@@ -167,15 +165,15 @@ class Message:
         # used for actual addresses store
         self.address = dict()
         # set address
-        self.to = to or []
+        self.to = set([to] if isinstance(to, str) else to or [])
         self.from_address = from_address
-        self.cc = cc or []
-        self.bcc = bcc or []
+        self.cc = set([cc] if isinstance(cc, str) else cc or [])
+        self.bcc = set([bcc] if isinstance(bcc, str) else bcc or [])
         self.reply_to = reply_to
 
     @property
     def to_address(self):
-        return self.to or self.cc or self.bcc
+        return self.to | self.cc | self.bcc
 
     def validate(self):
         """Do email message validation.
@@ -184,9 +182,9 @@ class Message:
             raise SenderError("does not specify any recipients(to,cc,bcc)")
         if not self.from_address:
             raise SenderError("does not specify fromaddr(sender)")
-        for c in "\r\n":
-            if self.subject and (c in self.subject):
-                raise SenderError("newline is not allowed in subject")
+
+        if any(self.subject and (c in self.subject) for c in "\n\r"):
+            raise SenderError("newline is not allowed in subject")
 
     def as_string(self) -> str:
         """The message string.
@@ -243,7 +241,7 @@ class Message:
         return self.as_string().encode(self.charset or "utf-8")
 
     def __str__(self):
-        return self.as_string()
+        return self.as_string()  # pragma: no cover
 
     def attach(self, attachment_or_attachments: Union["Attachment", Sequence["Attachment"]]):
         """Adds one or a list of attachments to the message.

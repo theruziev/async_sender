@@ -1,5 +1,8 @@
-AsyncSender
-===========
+.. image:: https://img.shields.io/travis/com/bruziev/async_sender.svg?style=flat-square
+        :target: https://travis-ci.com/bruziev/async_sender
+.. image:: https://img.shields.io/codecov/c/github/bruziev/async_sender.svg?style=flat-square
+        :target: https://codecov.io/gh/bruziev/async_sender
+
 
 
 AsyncSender provides a simple interface to set up SMTP and send asynchronously email messages.
@@ -19,7 +22,7 @@ Quickstart
 Sender is really easy to use.  Emails are managed through a `Mail`
 instance::
 
-    from sender import Mail
+    from async_sender import Mail
     import asyncio
 
     loop = asyncio.get_event_loop()
@@ -30,12 +33,13 @@ instance::
                       to="to@example.com", body="Hello world!"))
 
 
+
 Message
 -------
 
 To send one message, we need to create a `Message` instance::
 
-    from sender import Message
+    from async_sender import Message
 
     msg = Message("demo subject", from_address="from@example.com",
                   to="to@example.com")

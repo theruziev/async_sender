@@ -12,6 +12,7 @@ codecov = "*"
 coverage = "*"
 aiosmtplib = "*"
 sphinx = "*"
+aiohttp = "*"
 
 [packages]
 
