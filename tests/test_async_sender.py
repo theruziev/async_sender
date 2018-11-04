@@ -4,24 +4,18 @@ import aiohttp
 import pytest
 from async_sender import Message, SenderError, Attachment, Mail
 
-SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.mailtrap.io")
-SMTP_PORT = os.environ.get("SMTP_PORT", 2525)
+SMTP_HOST = os.environ.get("SMTP_HOST", "localhost")
+SMTP_PORT = os.environ.get("SMTP_PORT", 1025)
 SMTP_USERNAME = os.environ.get("SMTP_USERNAME")
 SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD")
-SMTP_TOKEN = os.environ.get("SMTP_TOKEN")
-SMTP_INBOX = 485_169
 
 
 @pytest.fixture()
 async def clear_inbox():
     async def factory():
         async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False)) as session:
-            async with session.patch(
-                f"https://mailtrap.io/api/v1/inboxes/{SMTP_INBOX}/clean?api_token={SMTP_TOKEN}"
-            ) as resp:
-                assert resp.status == 200
-                data = await resp.json()
-                assert data["id"] == SMTP_INBOX
+            async with session.delete(f"http://localhost:1080/messages") as resp:
+                assert resp.status == 204
 
     return factory
 
@@ -30,9 +24,7 @@ async def clear_inbox():
 async def get_emails():
     async def factory():
         async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False)) as session:
-            async with session.get(
-                f"https://mailtrap.io/api/v1/inboxes/{SMTP_INBOX}/messages?api_token={SMTP_TOKEN}"
-            ) as resp:
+            async with session.get(f"http://localhost:1080/messages/1.json") as resp:
                 assert resp.status == 200
                 return await resp.json()
 
@@ -203,13 +195,14 @@ async def test_send_email(clear_inbox, get_emails):
     mail = Mail(hostname=SMTP_HOST, port=SMTP_PORT, username=SMTP_USERNAME, password=SMTP_PASSWORD)
     msg = Message(
         from_address="from@example.com",
-        subject="Hello World",
+        subject="Hello Subject",
         to="to@example.com",
         body="Hello World",
     )
 
     await mail.send(msg)
-    email = (await get_emails())[0]
+    email = await get_emails()
+    assert msg.from_address in email["sender"]
     assert msg.subject == email["subject"]
-    assert msg.from_address == email["from_email"]
-    assert msg.to == {email["to_email"]}
+    assert msg.body in email["source"]
+    assert msg.message_id in email["source"]
