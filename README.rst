@@ -2,7 +2,9 @@
         :target: https://travis-ci.com/bruziev/async_sender
 .. image:: https://img.shields.io/codecov/c/github/bruziev/async_sender.svg?style=flat-square
         :target: https://codecov.io/gh/bruziev/async_sender
-
+.. image:: https://img.shields.io/pypi/v/async_sender.svg?style=flat-square   
+        :alt: PyPI   
+        :target: https://pypi.org/project/async_sender/
 
 
 AsyncSender provides a simple interface to set up SMTP and send asynchronously email messages.
