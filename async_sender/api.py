@@ -1,13 +1,7 @@
 import asyncio
 import ssl
-from typing import Union, Iterable, Sequence, Optional
-
-import aiosmtplib
-
-
-__version__ = "1.2"
-
 import time
+from typing import Union, Iterable, Sequence, Optional
 from email import charset as ch
 from email.encoders import encode_base64
 from email.mime.base import MIMEBase
@@ -15,6 +9,11 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.utils import make_msgid, formatdate
 from email.header import Header
+
+try:
+    import aiosmtplib
+except ImportError:
+    aiosmtplib = None  # pragma: no cover
 
 ch.add_charset("utf-8", ch.SHORTEST, None, "utf-8")
 
@@ -295,6 +294,8 @@ class Connection:
 
     def __init__(self, mail):
         self.mail = mail
+        if aiosmtplib is None:
+            raise RuntimeError("Please install 'aiosmtplib'")  # pragma: no cover
 
     async def __aenter__(self):
         server = aiosmtplib.SMTP(
