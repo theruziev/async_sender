@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
-import sys
 import os
 
-py_version = sys.version_info[:2]
+from async_sender import __version__
+
 
 here = os.path.abspath(os.path.dirname(__file__))
 try:
@@ -17,8 +17,8 @@ REQUIRED = [
 
 setup(
     name='async_sender',
-    version='0.1',
-    description="AsyncSender is a tiny module for SMTP mail sending, inspired by sender.",
+    version=__version__,
+    description="AsyncSender is a tiny module for SMTP mail sending, Inspired by Sender.",
     long_description=README,
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
@@ -30,7 +30,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: MIT License',
     ],
-    keywords='email sender',
+    keywords='email, sender, smtp, asyncio',
     author='Bakhtiyor Ruziev',
     author_email='bakhtiyor.ruziev@yandex.ru',
     url='http://github.com/bruziev/async_sender',
