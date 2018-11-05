@@ -5,7 +5,7 @@
 
 
 
-AsyncSender provides a simple interface to set up SMTP and send asynchronously email messages.
+AsyncSender provides a simple interface to set up a SMTP connection and send email messages asynchronously.
 
 
 Installation
