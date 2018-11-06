@@ -36,6 +36,8 @@ class Mail:
     :param use_tls: If True, make the initial connection to the server
         over TLS/SSL. Note that if the server supports STARTTLS only, this
         should be False.
+    :param use_starttls: If True, make the initial connection without encrypt to the server
+    over TCP and upgrade plain connection to an encrypted (TLS or SSL) connection.
     :param validate_certs: Determines if server certificates are
         validated. Defaults to True.
     :param client_cert: Path to client side certificate, for TLS
@@ -52,6 +54,7 @@ class Mail:
         hostname: str = "",
         port: int = None,
         use_tls: bool = False,
+        use_starttls: bool = False,
         username: str = None,
         password: str = None,
         from_address: str = None,
@@ -70,6 +73,7 @@ class Mail:
         self.username = username
         self.password = password
         self.use_tls = use_tls
+        self.use_starttls = use_starttls
         self.from_address = from_address
         self.timeout = timeout
         self.loop = loop
@@ -309,7 +313,7 @@ class Connection:
             cert_bundle=self.mail.cert_bundle,
         )
 
-        if self.mail.use_tls:
+        if self.mail.use_starttls:
             await server.starttls()
 
         await server.connect()
