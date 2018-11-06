@@ -12,8 +12,8 @@ from email.header import Header
 
 try:
     import aiosmtplib
-except ImportError:
-    aiosmtplib = None  # pragma: no cover
+except ImportError:  # pragma: no cover
+    aiosmtplib = None
 
 ch.add_charset("utf-8", ch.SHORTEST, None, "utf-8")
 
@@ -44,18 +44,22 @@ class Mail:
         tls_context: ssl.SSLContext = None,
         cert_bundle: str = None,
     ):
+
         """
 
-        :param hostname:  Server name (or IP) to connect to
+        :param hostname:  Server name (or IP) to connect
         :param port: Server port. Defaults to ``25`` if ``use_tls`` is
             ``False``, ``465`` if ``use_tls`` is ``True``.
-        :param source_address: The hostname of the client. Defaults to the
-            result of :func:`socket.getfqdn`. Note that this call blocks.
-        :param timeout: Default timeout value for the connection, in seconds.
-            Defaults to 60.
         :param use_tls: If True, make the initial connection to the server
             over TLS/SSL. Note that if the server supports STARTTLS only, this
             should be False.
+        :param username: Email for authenticate.
+        :param password: Password for authenticate.
+        :param from_address: Email address send from
+        :param timeout: Default timeout value for the connection, in seconds.
+            Defaults to 60.
+        :param source_address: The hostname of the client. Defaults to the
+            result of :func:`socket.getfqdn`. Note that this call blocks.
         :param validate_certs: Determines if server certificates are
             validated. Defaults to True.
         :param client_cert: Path to client side certificate, for TLS
@@ -65,7 +69,6 @@ class Mail:
             verification. Mutually exclusive with ``client_cert``/
             ``client_key``.
         :param cert_bundle: Path to certificate bundle, for TLS verification.
-
         """
 
         self.host = hostname
@@ -73,7 +76,7 @@ class Mail:
         self.username = username
         self.password = password
         self.use_tls = use_tls
-        self.fromaddr = from_address
+        self.from_address = from_address
         self.timeout = timeout
         self.loop = loop
         self.source_address = source_address
@@ -85,14 +88,16 @@ class Mail:
 
     @property
     def connection(self) -> "Connection":
-        """Open one connection to the SMTP server.
+        """
+        Open one connection to the SMTP server.
         """
         return Connection(self)
 
     async def send(self, message_or_messages: Union["Message", Iterable["Message"]]):
-        """Sends a single messsage or multiple messages.
+        """
+        Sends a single messsage or multiple messages.
 
-        :param message_or_messages: one message instance or one iterable of
+        :param message_or_messages: One message instance or one iterable of
                                     message instances.
         """
         try:
@@ -103,8 +108,8 @@ class Mail:
         async with self.connection as connection:
 
             for message in messages:
-                if self.fromaddr and not message.from_address:
-                    message.from_address = self.fromaddr
+                if self.from_address and not message.from_address:
+                    message.from_address = self.from_address
                 message.validate()
                 await connection.send(message)
 
@@ -161,9 +166,7 @@ class Message:
         self.extra_headers = extra_headers
         self.mail_options = mail_options or []
         self.rcpt_options = rcpt_options or []
-        # used for actual addresses store
-        self.address = dict()
-        # set address
+
         self.to = set([to] if isinstance(to, str) else to or [])
         self.from_address = from_address
         self.cc = set([cc] if isinstance(cc, str) else cc or [])
