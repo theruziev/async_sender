@@ -25,6 +25,26 @@ class SenderError(Exception):
 class Mail:
     """Sender Mail main class.  This class is used for manage SMTP server
     connections and send messages.
+
+    :param hostname:  Server name (or IP) to connect to
+    :param port: Server port. Defaults to ``25`` if ``use_tls`` is
+        ``False``, ``465`` if ``use_tls`` is ``True``.
+    :param source_address: The hostname of the client. Defaults to the
+        result of :func:`socket.getfqdn`. Note that this call blocks.
+    :param timeout: Default timeout value for the connection, in seconds.
+        Defaults to 60.
+    :param use_tls: If True, make the initial connection to the server
+        over TLS/SSL. Note that if the server supports STARTTLS only, this
+        should be False.
+    :param validate_certs: Determines if server certificates are
+        validated. Defaults to True.
+    :param client_cert: Path to client side certificate, for TLS
+        verification.
+    :param client_key: Path to client side key, for TLS verification.
+    :param tls_context: An existing :class:`ssl.SSLContext`, for TLS
+        verification. Mutually exclusive with ``client_cert``/
+        ``client_key``.
+    :param cert_bundle: Path to certificate bundle, for TLS verification.
     """
 
     def __init__(
@@ -44,32 +64,6 @@ class Mail:
         tls_context: ssl.SSLContext = None,
         cert_bundle: str = None,
     ):
-
-        """
-
-        :param hostname:  Server name (or IP) to connect
-        :param port: Server port. Defaults to ``25`` if ``use_tls`` is
-            ``False``, ``465`` if ``use_tls`` is ``True``.
-        :param use_tls: If True, make the initial connection to the server
-            over TLS/SSL. Note that if the server supports STARTTLS only, this
-            should be False.
-        :param username: Email for authenticate.
-        :param password: Password for authenticate.
-        :param from_address: Email address send from
-        :param timeout: Default timeout value for the connection, in seconds.
-            Defaults to 60.
-        :param source_address: The hostname of the client. Defaults to the
-            result of :func:`socket.getfqdn`. Note that this call blocks.
-        :param validate_certs: Determines if server certificates are
-            validated. Defaults to True.
-        :param client_cert: Path to client side certificate, for TLS
-            verification.
-        :param client_key: Path to client side key, for TLS verification.
-        :param tls_context: An existing :class:`ssl.SSLContext`, for TLS
-            verification. Mutually exclusive with ``client_cert``/
-            ``client_key``.
-        :param cert_bundle: Path to certificate bundle, for TLS verification.
-        """
 
         self.host = hostname
         self.port = port
