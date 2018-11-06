@@ -4,11 +4,6 @@ import aiohttp
 import pytest
 from async_sender import Message, SenderError, Attachment, Mail
 
-SMTP_HOST = os.environ.get("SMTP_HOST", "localhost")
-SMTP_PORT = os.environ.get("SMTP_PORT", 1025)
-SMTP_USERNAME = os.environ.get("SMTP_USERNAME")
-SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD")
-
 
 @pytest.fixture()
 async def clear_inbox():
@@ -192,7 +187,7 @@ def test_attachment_unicode_filename():
 async def test_send_email(clear_inbox, get_emails):
     await clear_inbox()
 
-    mail = Mail(hostname=SMTP_HOST, port=SMTP_PORT, username=SMTP_USERNAME, password=SMTP_PASSWORD)
+    mail = Mail(hostname="localhost", port=1025)
     msg = Message(
         from_address="from@example.com",
         subject="Hello Subject",
