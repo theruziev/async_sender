@@ -179,9 +179,9 @@ class Message:
         """Do email message validation.
         """
         if not (self.to or self.cc or self.bcc):
-            raise SenderError("does not specify any recipients(to,cc,bcc)")
+            raise SenderError("Does not specify any recipients(to,cc,bcc)")
         if not self.from_address:
-            raise SenderError("does not specify fromaddr(sender)")
+            raise SenderError("Does not specify from_address(sender)")
 
         if any(self.subject and (c in self.subject) for c in "\n\r"):
             raise SenderError("newline is not allowed in subject")
