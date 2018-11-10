@@ -23,7 +23,7 @@ class SenderError(Exception):
 
 
 class Mail:
-    """Sender Mail main class.  This class is used for manage SMTP server
+    """AsyncSender Mail main class.  This class is used for manage SMTP server
     connections and send messages.
 
     :param hostname:  Server name (or IP) to connect to
@@ -91,17 +91,12 @@ class Mail:
         """
         return Connection(self)
 
-    async def send(self, message_or_messages: Union["Message", Iterable["Message"]]):
+    async def send(self, *messages: "Message"):
         """
-        Sends a single messsage or multiple messages.
+        Sends a single or multiple messages.
 
-        :param message_or_messages: One message instance or one iterable of
-                                    message instances.
+        :param messages: Message instance.
         """
-        try:
-            messages = iter(message_or_messages)
-        except TypeError:
-            messages = [message_or_messages]
 
         async with self.connection as connection:
 
@@ -243,16 +238,12 @@ class Message:
     def __str__(self):
         return self.as_string()  # pragma: no cover
 
-    def attach(self, attachment_or_attachments: Union["Attachment", Sequence["Attachment"]]):
+    def attach(self, *attachment: "Attachment"):
         """Adds one or a list of attachments to the message.
 
-        :param attachment_or_attachments: one or an iterable of attachments
+        :param attachment: Attachment instance.
         """
-        try:
-            attachments = iter(attachment_or_attachments)
-        except TypeError:
-            attachments = [attachment_or_attachments]
-        self.attachments.extend(attachments)
+        self.attachments.extend(attachment)
 
     def attach_attachment(self, *args, **kwargs):
         """Shortcut for attach.

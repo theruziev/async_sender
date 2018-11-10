@@ -131,7 +131,7 @@ def test_attach():
     atts = [Attachment() for i in range(3)]
     msg.attach(att)
     assert msg.attachments == [att]
-    msg.attach(atts)
+    msg.attach(*atts)
     assert msg.attachments == [att] + atts
 
 
