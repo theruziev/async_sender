@@ -21,7 +21,7 @@ Install with the following command::
 Quickstart
 ----------
 
-Sender is really easy to use.  Emails are managed through a `Mail`
+AsyncSender is really easy to use.  Emails are managed through a `Mail`
 instance::
 
     from async_sender import Mail

@@ -91,17 +91,12 @@ class Mail:
         """
         return Connection(self)
 
-    async def send(self, message_or_messages: Union["Message", Iterable["Message"]]):
+    async def send(self, *messages: "Message"):
         """
-        Sends a single messsage or multiple messages.
+        Sends a single or multiple messages.
 
-        :param message_or_messages: One message instance or one iterable of
-                                    message instances.
+        :param messages: Message instance.
         """
-        try:
-            messages = iter(message_or_messages)
-        except TypeError:
-            messages = [message_or_messages]
 
         async with self.connection as connection:
 
