@@ -15,14 +15,18 @@ Installation
 
 Install with the following command::
 
-    $ pip install async_sender
+.. code-block:: bash
+
+    pip install async_sender
 
 
 Quickstart
 ----------
 
 AsyncSender is really easy to use.  Emails are managed through a `Mail`
-instance::
+instance
+
+.. code-block:: python
 
     from async_sender import Mail
     import asyncio
@@ -39,7 +43,9 @@ instance::
 Message
 -------
 
-To send one message, we need to create a `Message` instance::
+To send one message, we need to create a `Message` instance
+
+.. code-block:: python
 
     from async_sender import Message
 
