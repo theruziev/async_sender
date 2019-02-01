@@ -12,7 +12,7 @@ except IOError:
 
 
 REQUIRED = [
-    'aiosmtplib==1.0.3'
+    'aiosmtplib==1.0.4'
 ]
 
 setup(
