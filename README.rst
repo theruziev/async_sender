@@ -13,7 +13,7 @@ AsyncSender provides a simple interface to set up a SMTP connection and send ema
 Installation
 ------------
 
-Install with the following command::
+Install with the following command
 
 .. code-block:: bash
 
