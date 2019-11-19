@@ -34,11 +34,11 @@
         },
         "aiosmtplib": {
             "hashes": [
-                "sha256:3a2dd9dc6cb73f257b639e14a0a4007344da22f8d57065e5a862f7aedbf6cc4f",
-                "sha256:7d4ed9e517d0c7ebcb4ebe7a2cc77296a25e6c0a3924b41943e05ceafbacf09a"
+                "sha256:57c0034944c07d98ce0f5ec8dcb4b9b04b3bc1303c4bde62c392225a29d6cbd1",
+                "sha256:ec3d2e95af708143181f4ea1bd1752d525cbeec1570c42eee731524de34200a9"
             ],
             "index": "pypi",
-            "version": "==1.1.0"
+            "version": "==1.1.2"
         },
         "alabaster": {
             "hashes": [
