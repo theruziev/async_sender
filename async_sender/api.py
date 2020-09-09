@@ -304,10 +304,10 @@ class Connection:
             cert_bundle=self.mail.cert_bundle,
         )
 
+        await server.connect()
+
         if self.mail.use_starttls:
             await server.starttls()
-
-        await server.connect()
 
         if self.mail.username and self.mail.password:
             await server.login(self.mail.username, self.mail.password)
