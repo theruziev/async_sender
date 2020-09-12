@@ -107,8 +107,7 @@ class Mail:
                 await connection.send(message)
 
     async def send_message(self, *args, **kwargs):
-        """Shortcut for send.
-        """
+        """Shortcut for send."""
         await self.send(Message(*args, **kwargs))
 
 
@@ -171,8 +170,7 @@ class Message:
         return self.to | self.cc | self.bcc
 
     def validate(self):
-        """Do email message validation.
-        """
+        """Do email message validation."""
         if not (self.to or self.cc or self.bcc):
             raise SenderError("Does not specify any recipients(to,cc,bcc)")
         if not self.from_address:
@@ -182,8 +180,7 @@ class Message:
             raise SenderError("newline is not allowed in subject")
 
     def as_string(self) -> str:
-        """The message string.
-        """
+        """The message string."""
         if self.date is None:
             self.date = time.time()
 
@@ -246,8 +243,7 @@ class Message:
         self.attachments.extend(attachment)
 
     def attach_attachment(self, *args, **kwargs):
-        """Shortcut for attach.
-        """
+        """Shortcut for attach."""
         self.attach(Attachment(*args, **kwargs))
 
 

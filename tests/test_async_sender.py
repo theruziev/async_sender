@@ -1,6 +1,4 @@
-import os
-
-import aiohttp
+import httpx
 import pytest
 from async_sender import Message, SenderError, Attachment, Mail
 
@@ -8,9 +6,9 @@ from async_sender import Message, SenderError, Attachment, Mail
 @pytest.fixture()
 async def clear_inbox():
     async def factory():
-        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False)) as session:
-            async with session.delete(f"http://localhost:1080/messages") as resp:
-                assert resp.status == 204
+        async with httpx.AsyncClient() as client:
+            r = await client.delete(f"http://localhost:1080/messages")
+            assert r.status_code == 204
 
     return factory
 
@@ -18,10 +16,10 @@ async def clear_inbox():
 @pytest.fixture()
 async def get_emails():
     async def factory():
-        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False)) as session:
-            async with session.get(f"http://localhost:1080/messages/1.json") as resp:
-                assert resp.status == 200
-                return await resp.json()
+        async with httpx.AsyncClient() as client:
+            r = await client.get(f"http://localhost:1080/messages/1.json")
+            assert r.status_code == 200
+            return r.json()
 
     return factory
 
