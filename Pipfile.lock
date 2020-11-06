@@ -46,11 +46,11 @@
         },
         "httpx": {
             "hashes": [
-                "sha256:032c624c703cfa3aafe2d3a766150b48bcf8df71e833c1440fa74151da9df143",
-                "sha256:824325d2dfb42ee6e3be31e072199a33e5a98dc2bda76fd6c9a844871948eb73"
+                "sha256:126424c279c842738805974687e0518a94c7ae8d140cd65b9c4f77ac46ffa537",
+                "sha256:9cffb8ba31fac6536f2c8cde30df859013f59e4bcc5b8d43901cb3654a8e0a5b"
             ],
             "index": "pypi",
-            "version": "==0.16.0"
+            "version": "==0.16.1"
         },
         "idna": {
             "hashes": [
