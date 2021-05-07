@@ -47,10 +47,10 @@
         },
         "httpcore": {
             "hashes": [
-                "sha256:52b7d9413f6f5592a667de9209d70d4d41aba3fb0540dd7c93475c78b85941e9",
-                "sha256:c16efbdf643e1b57bde0adc12c53b08645d7d92d6d345a3f71adfc2a083e7fd2"
+                "sha256:5d674b57a11275904d4fd0819ca02f960c538e4472533620f322fc7db1ea0edc",
+                "sha256:ff614f0ef875b9e5fe0bdd459b31ea0eea282ff12dc82add83d68b3811ee94ad"
             ],
-            "version": "==0.13.2"
+            "version": "==0.13.3"
         },
         "httpx": {
             "hashes": [
@@ -123,11 +123,11 @@
         },
         "aiosmtplib": {
             "hashes": [
-                "sha256:8270d0a06475aa05b9276fc954fbd08a1f6c59d0452b4899413d8bca1db24541",
-                "sha256:93e53edac183f1a608bc34464efeef23902e59e949017b1682014f59ecdcd37d"
+                "sha256:6e03a96fa4692c8550cca4957834bb3e49651aba3ce34f161c03c8c0922beef6",
+                "sha256:95588f48f4ccc79a7a790a89e06d3b1df38a4ba8b345be494db3f623d3d7e2ee"
             ],
             "index": "pypi",
-            "version": "==1.1.4"
+            "version": "==1.1.5"
         },
         "alabaster": {
             "hashes": [
@@ -152,10 +152,10 @@
         },
         "attrs": {
             "hashes": [
-                "sha256:31b2eced602aa8423c2aea9c76a724617ed67cf9513173fd3a4f03e3a929c7e6",
-                "sha256:832aa3cde19744e49938b91fea06d69ecb9e649c93ba974535d08ad92164f700"
+                "sha256:3901be1cb7c2a780f14668691474d9252c070a756be0a9ead98cfeabfa11aeb8",
+                "sha256:8ee1e5f5a1afc5b19bdfae4fdf0c35ed324074bdce3500c939842c8f818645d9"
             ],
-            "version": "==20.3.0"
+            "version": "==21.1.0"
         },
         "babel": {
             "hashes": [
