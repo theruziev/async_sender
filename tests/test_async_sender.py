@@ -19,7 +19,11 @@ async def get_emails():
         async with httpx.AsyncClient() as client:
             r = await client.get(f"http://localhost:1080/messages/1.json")
             assert r.status_code == 200
-            return r.json()
+            data = r.json()
+            r = await client.get(f"http://localhost:1080/messages/1.source")
+            assert r.status_code == 200
+            data["source"] = r.text
+            return data
 
     return factory
 

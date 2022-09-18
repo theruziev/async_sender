@@ -8,7 +8,7 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.utils import make_msgid, formatdate
-from email.header import Header
+from email.header import Header, USASCII
 
 try:
     import aiosmtplib
@@ -198,6 +198,11 @@ class Message:
             msg.attach(alternative)
 
         msg["Subject"] = Header(self.subject, self.charset)
+        # For improve deliver-ability
+        # https://github.com/theruziev/async_sender/issues/228
+        if self.subject is not None and self.subject.isascii():
+            msg["Subject"] = Header(self.subject, USASCII)
+
         msg["From"] = self.from_address
         msg["To"] = ", ".join(self.to)
         msg["Date"] = formatdate(self.date, localtime=True)
