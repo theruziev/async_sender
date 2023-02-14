@@ -42,7 +42,7 @@ freeze:
 	pipenv lock -d
 
 mock:
-	docker run -d -p 1080:1080 -p 1025:1025 --name mailcatcher schickling/mailcatcher
+	docker start mailcatcher || docker run -d -p 1080:1080 -p 1025:1025 --name mailcatcher schickling/mailcatcher
 
 _release:
 	scripts/make_release.sh

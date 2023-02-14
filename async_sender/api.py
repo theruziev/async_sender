@@ -1,4 +1,3 @@
-import asyncio
 import ssl
 import time
 from typing import Union, Iterable, Sequence, Optional
@@ -8,7 +7,9 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.utils import make_msgid, formatdate
-from email.header import Header, USASCII
+from email.header import Header
+
+USASCII = ch.Charset("us-ascii")
 
 try:
     import aiosmtplib
@@ -60,14 +61,12 @@ class Mail:
         from_address: str = None,
         timeout: Union[int, float] = None,
         source_address: str = None,
-        loop: asyncio.AbstractEventLoop = None,
         validate_certs: bool = True,
         client_cert: str = None,
         client_key: str = None,
         tls_context: ssl.SSLContext = None,
         cert_bundle: str = None,
     ):
-
         self.host = hostname
         self.port = port
         self.username = username
@@ -76,7 +75,6 @@ class Mail:
         self.use_starttls = use_starttls
         self.from_address = from_address
         self.timeout = timeout
-        self.loop = loop
         self.source_address = source_address
         self.validate_certs = validate_certs
         self.client_cert = client_cert
@@ -99,7 +97,6 @@ class Mail:
         """
 
         async with self.connection as connection:
-
             for message in messages:
                 if self.from_address and not message.from_address:
                     message.from_address = self.from_address
@@ -297,7 +294,6 @@ class Connection:
             use_tls=self.mail.use_tls,
             timeout=self.mail.timeout,
             source_address=self.mail.source_address,
-            loop=self.mail.loop,
             validate_certs=self.mail.validate_certs,
             client_cert=self.mail.client_cert,
             client_key=self.mail.client_key,

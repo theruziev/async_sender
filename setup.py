@@ -12,7 +12,7 @@ except IOError:
 
 
 REQUIRED = [
-    'aiosmtplib==1.1.7'
+    'aiosmtplib==2.0.1'
 ]
 
 setup(
@@ -25,22 +25,20 @@ setup(
         'Development Status :: 3 - Alpha',
         "Intended Audience :: Developers",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: Implementation :: CPython",
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: MIT License',
     ],
     keywords='email, sender, smtp, asyncio',
     author='Bakhtiyor Ruziev',
-    author_email='bakhtiyor.ruziev@yandex.ru',
-    url='http://github.com/bruziev/async_sender',
+    author_email='rbakhtiyor+github@gmail.com',
+    url='https://github.com/theruziev/async_sender',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     install_requires=REQUIRED,
-
-
-
 )
