@@ -4,7 +4,7 @@ from async_sender import Message, SenderError, Attachment, Mail
 
 
 @pytest.fixture()
-async def clear_inbox():
+def clear_inbox():
     async def factory():
         async with httpx.AsyncClient() as client:
             r = await client.delete(f"http://localhost:1080/messages")
@@ -14,7 +14,7 @@ async def clear_inbox():
 
 
 @pytest.fixture()
-async def get_emails():
+def get_emails():
     async def factory():
         async with httpx.AsyncClient() as client:
             r = await client.get(f"http://localhost:1080/messages/1.json")

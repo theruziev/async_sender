@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'AsyncSender'
-copyright = '2018, Bakhtiyor Ruziev'
+copyright = '2023, Bakhtiyor Ruziev'
 author = 'Bakhtiyor Ruziev'
 
 # The short X.Y version

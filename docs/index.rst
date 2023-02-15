@@ -11,6 +11,7 @@ Welcome to AsyncSender's documentation!
    :hidden:
 
    async_sender
+   changelog
 
 
 AsyncSender provides a simple interface to set up a SMTP connection and send email messages asynchronously.
@@ -33,13 +34,15 @@ instance::
     from async_sender import Mail
     import asyncio
 
-    loop = asyncio.get_event_loop()
 
-    mail = Mail()
+    async def run():
+        mail = Mail()
 
-    loop.run_until_complete(mail.send_message("Hello", from_address="from@example.com",
-                      to="to@example.com", body="Hello world!"))
+        await mail.send_message("Hello", from_address="from@example.com",
+                                to="to@example.com", body="Hello world!")
 
+
+    asyncio.run(run())
 
 Message
 -------

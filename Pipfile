@@ -7,19 +7,19 @@ name = "pypi"
 "flake8" = "*"
 pytest = "*"
 pytest-asyncio = "*"
-black = "==22.8.0"
+black = "==23.1.0"
 codecov = "*"
 coverage = "*"
 aiosmtplib = "*"
+httpx = "*"
 sphinx = "*"
-aiohttp = "*"
 typing-extensions = "*"
 
 [packages]
 httpx = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.8"
 
 [pipenv]
 allow_prereleases = true
