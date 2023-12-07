@@ -37,6 +37,8 @@ class Mail:
     :param use_tls: If True, make the initial connection to the server
         over TLS/SSL. Note that if the server supports STARTTLS only, this
         should be False.
+    :param use_ehlo: If True, it sends a "Extended Hello" to the server, 
+        trading info about options and capacities of the channel.
     :param use_starttls: If True, make the initial connection without encrypt to the server
     over TCP and upgrade plain connection to an encrypted (TLS or SSL) connection.
     :param validate_certs: Determines if server certificates are
@@ -55,6 +57,7 @@ class Mail:
         hostname: str = "",
         port: int = None,
         use_tls: bool = False,
+        use_ehlo: bool = False,
         use_starttls: bool = False,
         username: str = None,
         password: str = None,
@@ -71,7 +74,8 @@ class Mail:
         self.port = port
         self.username = username
         self.password = password
-        self.use_tls = use_tls
+        self.use_tls = use_tls,
+        self.use_ehlo = use_ehlo
         self.use_starttls = use_starttls
         self.from_address = from_address
         self.timeout = timeout
@@ -302,6 +306,9 @@ class Connection:
         )
 
         await server.connect()
+
+        if self.mail.use_ehlo:
+            await server.ehlo()
 
         if self.mail.use_starttls:
             await server.starttls()
