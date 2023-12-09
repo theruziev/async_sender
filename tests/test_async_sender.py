@@ -99,6 +99,11 @@ def test_extra_headers():
     )
     assert "Extra-Header-Test: Test" in str(msg)
 
+def test_message_subject_charset():
+    msg = Message(subject="hello world")
+    assert "hello world" in msg.as_string()
+    msg_utf8_subject = Message(subject="Привет мир")
+    assert "=?utf-8?b?0J/RgNC40LLQtdGCINC80LjRgA==?=" in msg_utf8_subject.as_string()
 
 def test_mail_and_rcpt_options():
     msg = Message()
