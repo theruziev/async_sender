@@ -537,11 +537,12 @@
         },
         "pytest-asyncio": {
             "hashes": [
-                "sha256:2b38a496aef56f56b0e87557ec313e11e1ab9276fc3863f6a7be0f1d0e415e1b",
-                "sha256:f2b3366b7cd501a4056858bd39349d5af19742aed2d81660b7998b6341c7eb9c"
+                "sha256:c16052382554c7b22d48782ab3438d5b10f8cf7a4bdcae7f0f67f097d95beecc",
+                "sha256:ea9021364e32d58f0be43b91c6233fb8d2224ccef2398d6837559e587682808f"
             ],
             "index": "pypi",
-            "version": "==0.21.0"
+            "markers": "python_version >= '3.8'",
+            "version": "==0.23.2"
         },
         "pytz": {
             "hashes": [
