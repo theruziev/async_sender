@@ -194,11 +194,12 @@ class Message:
             alternative.attach(MIMEText(self.html, "html", self.charset))
             msg.attach(alternative)
 
-        msg["Subject"] = Header(self.subject, self.charset)
         # For improve deliver-ability
         # https://github.com/theruziev/async_sender/issues/228
         if self.subject is not None and self.subject.isascii():
             msg["Subject"] = Header(self.subject, USASCII)
+        else:
+            msg["Subject"] = Header(self.subject, self.charset)
 
         msg["From"] = self.from_address
         msg["To"] = ", ".join(self.to)
