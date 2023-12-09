@@ -326,6 +326,6 @@ class Connection:
             message.from_address,
             message.to_address,
             message.as_bytes(),
-            message.mail_options,
-            message.rcpt_options,
+            mail_options=message.mail_options,
+            rcpt_options=message.rcpt_options,
         )
