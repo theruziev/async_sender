@@ -74,7 +74,7 @@ class Mail:
         self.port = port
         self.username = username
         self.password = password
-        self.use_tls = use_tls,
+        self.use_tls = use_tls
         self.use_ehlo = use_ehlo
         self.use_starttls = use_starttls
         self.from_address = from_address
